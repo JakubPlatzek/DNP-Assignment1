@@ -1,0 +1,79 @@
+@page "/Login"
+@using Assignment1.Data
+@using Assignment1.Persistence
+@namespace Assignment1.LoginComponent
+@inject AuthenticationStateProvider AuthenticationStateProvider;
+@inject NavigationManager nvgManager;
+@inject IUserService _userService;
+@inject FileContext _fileContext;
+
+
+<AuthorizeView>
+    <NotAuthorized>
+        <div class="form-group">
+            <label>User name:</label>
+            <input type="text" placeholder="user name" @bind-value="userName"/>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" placeholder="password" @bind-value="password"/>
+        </div>
+        <div style="color:red">@errorMessage</div>
+
+        <a href="" @onclick="PerformLogin">
+            Login
+        </a>
+    </NotAuthorized>
+    <Authorized>
+        <a href="" @onclick="PerformLogout">
+            Log out
+        </a>
+    </Authorized>
+</AuthorizeView>
+
+
+
+@code {
+    private string userName;
+    private string password;
+    private string errorMessage;
+
+    public async Task PerformLogin()
+    {
+        errorMessage = "";
+        try
+        {
+            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(userName, password);
+            //Overwrite logged attribute of entered user to true
+            _fileContext.Users.First(t => t.UserName.Equals(userName) && t.Password.Equals(password)).Logged = true;
+            _fileContext.SaveChanges();
+           /* userName = "";
+            password = "";*/
+            nvgManager.NavigateTo("/");
+            
+        }
+        catch (Exception e)
+        {
+            errorMessage = e.Message;
+        }
+    }
+
+    public async Task PerformLogout()
+    {
+        //Overwrite logged attribute of entered user to false
+        _fileContext.Users.First(t => t.UserName.Equals(userName) && t.Password.Equals(password)).Logged = false;
+        _fileContext.SaveChanges();
+        errorMessage = "";
+        userName = "";
+        password = "";
+        try
+        {
+            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+            nvgManager.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            
+        }
+    }
+}
