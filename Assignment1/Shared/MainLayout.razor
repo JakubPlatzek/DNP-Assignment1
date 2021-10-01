@@ -1,0 +1,25 @@
+@using Microsoft.AspNetCore.Identity
+@using Assignment1.LoginComponent
+@inherits LayoutComponentBase
+@inject NavigationManager nvgMngr;
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu/>
+    </div>
+
+    <div class="main">
+        <div class="top-row px-4">
+            <Login/>
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <div class="content px-4">
+            @Body
+        </div>
+    </div>
+</div>
+
+@code{
+
+}

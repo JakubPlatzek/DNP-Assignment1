@@ -1,0 +1,27 @@
+@page "/Register"
+@using Models
+@using Assignment1.Data
+@inject NavigationManager nvg;
+@inject IUserService _userService;
+<h3>Registration page</h3>
+
+<EditForm Model="@newUser" OnValidSubmit="@AddNewUser"><DataAnnotationsValidator/><ValidationSummary/>
+    <label>Username:</label><br/>
+    <input type="text" placeholder="user name"@bind-value="newUser.UserName"/>
+    <br/><label>Password:</label><br/>
+     <input type="text" placeholder="password" @bind-value="newUser.Password"/>
+    <p class="actions">
+                <button class="btn btn-outline-dark" type="submit">Create</button>
+            </p>
+</EditForm>
+
+@code {
+    private User newUser= new User();
+
+    private void AddNewUser()
+    {
+        _userService.AddUser(newUser);
+        nvg.NavigateTo("/");
+    }
+    
+}

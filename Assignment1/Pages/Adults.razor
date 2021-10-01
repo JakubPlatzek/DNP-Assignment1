@@ -1,0 +1,260 @@
+@page "/Adults"
+@using Models
+@using Assignment1.Data
+@using System.Xml
+@inject NavigationManager _navgManager;
+@inject IAdultsData _adults
+
+
+<h3>Adults</h3>
+<p>
+    Filter by: <select class="form-control-plaintext" @oninput="@((args) => FilterBySelected(args))" style="width: 150px ">
+        <option>Id</option><option>First name</option><option>Last name</option><option>Job title</option><option>Salary</option><option>Age</option>
+        <option>Hair color</option><option>Eye color</option><option>Weight</option><option>Height</option><option>Sex</option>
+    </select>
+    <input @bind="inputField" type="text" @oninput="@((args) => FilterByInput(args))" style="width:300px"/>
+</p>
+@if (adultsToShow == null)
+{
+    <p>
+    <em>Loading...</em>
+    </p>
+}
+else if(!adultsToShow.Any()){
+<p>
+    <em>No adults in the system. You can start by adding some.</em>
+    </p>
+}
+else
+{
+    <table class="adults">
+        <thead>
+        <tr>
+            <th>Id</th><th>First name</th><th>Last name</th>><th>Job title</th><th>Salary</th><th>Age</th>
+            <th>Hair color</th><th>Eye color</th><th>Weight</th><th>Height</th><th>Sex</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in adultsToShow)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.JobTitle.JobTitle</td>
+                <td>@item.JobTitle.Salary</td>
+                <td>@item.Age</td>
+                <td>@item.HairColor</td>
+                <td>@item.EyeColor</td>
+                <td>@item.Weight</td>
+                <td>@item.Height</td>
+                <td>@item.Sex</td>
+                <td>
+                    <button @onclick="@(() => RemoveAdult(item.Id))">
+                        <i class="oi oi-trash" style="color:red"/>
+                    </button>
+                </td>
+                <td>
+                    <button @onclick="@(() => Edit(item.Id))">
+                        <i class="oi oi-pencil" style="color:#1b6ec2"/>
+                    </button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code{
+private IList<Adult> allAdults;
+private IList<Adult> adultsToShow;
+    private string selected;
+    private string inputField;
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+        allAdults = _adults.GetAdults();
+        adultsToShow = allAdults;
+        inputField = "";
+    }
+    
+    
+    private void FilterBySelected(ChangeEventArgs args)
+    {
+        try
+        {
+            selected = args.Value?.ToString();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Filtering went wrong");
+        }
+    }
+    
+    private void FilterByInput(ChangeEventArgs args)
+    {
+        if (args.Value.ToString().Equals(""))
+            {
+                adultsToShow = allAdults;
+            }
+        switch (selected)
+            {
+                case "Id":
+                {
+                    var id = args.Value.ToString();
+                    if (id.Equals(""))
+                    {
+                        adultsToShow = allAdults;
+                    }
+                    else
+                    {
+                        adultsToShow = allAdults.Where(t => id != null && t.Id.ToString().Equals(id)).ToList();  
+                    }
+                    break;
+                }
+                case "First name":
+                {
+                    var firstName = args.Value.ToString();
+                    if (firstName.Equals(""))
+                    {
+                        adultsToShow = allAdults;
+                    }
+                    else
+                    {
+                        adultsToShow = allAdults.Where(t => firstName != null && t.FirstName.Contains(firstName)).ToList();  
+                    }
+                    break;
+                }
+                case "Last name":
+                {
+                    var lastName = args.Value.ToString();
+                    if (lastName.Equals(""))
+                    {
+                        adultsToShow = allAdults;
+                    }
+                    else
+                    {
+                        adultsToShow = allAdults.Where(t => lastName != null && t.LastName.Contains(lastName)).ToList();  
+                    }
+                    break;
+                }
+                case "Job title":
+                {
+                    var jobTitle = args.Value.ToString();
+                    if (jobTitle.Equals(""))
+                    {
+                        adultsToShow = allAdults;
+                    }
+                    else
+                    {
+                        adultsToShow = allAdults.Where(t => jobTitle != null && t.JobTitle.JobTitle.Contains(jobTitle)).ToList();  
+                    }
+                    break;
+                }
+                case "Salary":
+                {
+                    var salary = args.Value.ToString();
+                    if (salary.Equals(""))
+                    {
+                        adultsToShow = allAdults;
+                    }
+                    else
+                    {
+                        adultsToShow = allAdults.Where(t => salary != null && t.JobTitle.Salary.ToString().Contains(salary)).ToList();  
+                    }
+                    break;
+                }
+                case "Age":
+                {
+                    var age = args.Value.ToString();
+                    if (age.Equals(""))
+                    {
+                        adultsToShow = allAdults;
+                    }
+                    else
+                    {
+                        adultsToShow = allAdults.Where(t => age != null && t.Age.ToString().Contains(age)).ToList();  
+                    }
+                    break;
+                }
+                case "Hair color":
+                {
+                    var hairColor = args.Value.ToString();
+                    if (hairColor.Equals(""))
+                    {
+                        adultsToShow = allAdults;
+                    }
+                    else
+                    {
+                        adultsToShow = allAdults.Where(t => hairColor != null && t.HairColor.Contains(hairColor)).ToList();  
+                    }
+                    break;
+                }
+                case "Eye color":
+                {
+                    var eyeColor = args.Value.ToString();
+                    if (eyeColor.Equals(""))
+                    {
+                        adultsToShow = allAdults;
+                    }
+                    else
+                    {
+                        adultsToShow = allAdults.Where(t => eyeColor != null && t.EyeColor.Contains(eyeColor)).ToList();  
+                    }
+                    break;
+                }
+                case "Weight":
+                {
+                    var weight = args.Value.ToString();
+                    if (weight.Equals(""))
+                    {
+                        adultsToShow = allAdults;
+                    }
+                    else
+                    {
+                        adultsToShow = allAdults.Where(t => weight != null && t.Weight.ToString().Contains(weight)).ToList();  
+                    }
+                    break;
+                }
+                case "Height":
+                {
+                    var height = args.Value.ToString();
+                    if (height.Equals(""))
+                    {
+                        adultsToShow = allAdults;
+                    }
+                    else
+                    {
+                        adultsToShow = allAdults.Where(t => height != null && t.Height.ToString().Contains(height)).ToList();  
+                    }
+                    break;
+                }
+                case "Sex":
+                {
+                    var sex = args.Value.ToString();
+                    if (sex.Equals(""))
+                    {
+                        adultsToShow = allAdults;
+                    }
+                    else
+                    {
+                        adultsToShow = allAdults.Where(t => sex != null && t.Sex.Contains(sex)).ToList();  
+                    }
+                    break;
+                }
+            }
+    }
+
+    private void Edit(int Id)
+    {
+        _navgManager.NavigateTo($"Edit/{Id}");
+    }
+
+    private void RemoveAdult(int Id)
+    {
+        Adult adultToRemove = allAdults.First(t => t.Id == Id);
+        _adults.RemoveAdult(adultToRemove.FirstName, adultToRemove.LastName);
+        allAdults.Remove(adultToRemove);
+    }
+}
