@@ -208,20 +208,5 @@
     "Weight": 55.4,
     "Height": 171,
     "Sex": "M"
-  },
-  {
-    "JobTitle": {
-      "JobTitle": "Call Center Agent",
-      "Salary": 20308
-    },
-    "Id": 14,
-    "FirstName": "Isiah",
-    "LastName": "Esparza",
-    "HairColor": "Brown",
-    "EyeColor": "Brown",
-    "Age": 44,
-    "Weight": 81.8,
-    "Height": 172,
-    "Sex": "M"
   }
 ]

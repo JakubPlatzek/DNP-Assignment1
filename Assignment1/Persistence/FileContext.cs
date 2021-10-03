@@ -12,9 +12,9 @@ namespace Assignment1.Persistence
         
         public IList<User> Users { get; private set; }
 
-        private readonly string familiesFile = "C:/Users/jakub/RiderProjects/Assignment1/Assignment1/Database/families.json";
-        private readonly string adultsFile = "C:/Users/jakub/RiderProjects/Assignment1/Assignment1/Database/adults.json";
-        private readonly string usersFile = "C:/Users/jakub/RiderProjects/Assignment1/Assignment1/Database/users.json";
+        private readonly string familiesFile = "Database/families.json";
+        private readonly string adultsFile = "Database/adults.json";
+        private readonly string usersFile = "Database/users.json";
 
         public FileContext()
         {

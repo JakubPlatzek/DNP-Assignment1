@@ -2,6 +2,6 @@
   {
     "UserName": "admin",
     "Password": "admin",
-    "Logged": false
+    "Registered": "true"
   }
 ]

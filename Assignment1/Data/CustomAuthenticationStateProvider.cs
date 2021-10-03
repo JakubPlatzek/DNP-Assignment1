@@ -68,7 +68,7 @@ namespace Assignment1.Data
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.Name, user.UserName));
             claims.Add(new Claim("Password", user.Password));
-            claims.Add(new Claim("Logged", user.Logged.ToString()));
+            claims.Add(new Claim("Logged", user.Registered));
 
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;

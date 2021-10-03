@@ -34,19 +34,10 @@ namespace Assignment1.Data
 
         public void AddUser(User user)
         {
+            user.Registered = "true";
             users.Add(user);
             fileContext.SaveChanges();
         }
-
-        public void SetLogged(string username, string password, bool status)
-        {
-            for (int i = 0; i < users.Count; i++)
-            {
-                if (users[i].UserName.Equals(username) && users[i].Password.Equals(password))
-                {
-                    users[i].Logged = status;
-                }
-            }
-        }
+        
     }
 }

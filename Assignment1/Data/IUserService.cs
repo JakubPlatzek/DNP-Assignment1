@@ -6,6 +6,5 @@ namespace Assignment1.Data
     {
         User ValidateUser(string userName, string Password);
         void AddUser(User user);
-        void SetLogged(string username, string password, bool status);
     }
 }

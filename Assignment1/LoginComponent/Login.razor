@@ -4,8 +4,6 @@
 @namespace Assignment1.LoginComponent
 @inject AuthenticationStateProvider AuthenticationStateProvider;
 @inject NavigationManager nvgManager;
-@inject IUserService _userService;
-@inject FileContext _fileContext;
 
 
 <AuthorizeView>
@@ -44,10 +42,7 @@
         try
         {
             ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(userName, password);
-            //Overwrite logged attribute of entered user to true
-            _fileContext.Users.First(t => t.UserName.Equals(userName) && t.Password.Equals(password)).Logged = true;
-            _fileContext.SaveChanges();
-           /* userName = "";
+         /* userName = "";
             password = "";*/
             nvgManager.NavigateTo("/");
             
@@ -60,9 +55,6 @@
 
     public async Task PerformLogout()
     {
-        //Overwrite logged attribute of entered user to false
-        _fileContext.Users.First(t => t.UserName.Equals(userName) && t.Password.Equals(password)).Logged = false;
-        _fileContext.SaveChanges();
         errorMessage = "";
         userName = "";
         password = "";
