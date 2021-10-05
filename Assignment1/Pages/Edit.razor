@@ -5,6 +5,8 @@
 @inject NavigationManager nvg;
 <h3>Edit adult with id: @Id</h3>
 
+<link href="General.css" rel="stylesheet">
+
 @if (adultToEdit == null)
 {
     <em>Adult not found!</em>
@@ -13,16 +15,16 @@ else
 {
     <EditForm Model="@adultToEdit" OnValidSubmit="@Save">
         <DataAnnotationsValidator/> <ValidationSummary/>
-        <div class="form-group"> Job title<br/> <InputTextArea @bind-Value="adultToEdit.JobTitle.JobTitle"></InputTextArea></div>
-            <div class="form-group"> Salary<br/> <InputNumber @bind-Value="adultToEdit.JobTitle.Salary"></InputNumber></div>
-            <div class="form-group"> First name<br/> <InputTextArea @bind-Value="adultToEdit.FirstName"></InputTextArea></div>
-            <div class="form-group"> Last name<br/> <InputTextArea @bind-Value="adultToEdit.LastName"></InputTextArea></div>
-            <div class="form-group"> Hair color<br/> <InputTextArea @bind-Value="adultToEdit.HairColor"></InputTextArea></div>
-            <div class="form-group"> Eye color<br/> <InputTextArea @bind-Value="adultToEdit.EyeColor"></InputTextArea></div>
-            <div class="form-group"> Age<br/> <InputNumber @bind-Value="adultToEdit.Age"></InputNumber></div>
-            <div class="form-group"> Weight<br/> <InputNumber @bind-Value="adultToEdit.Weight"></InputNumber></div>
-            <div class="form-group"> Height<br/> <InputNumber @bind-Value="adultToEdit.Height"></InputNumber></div>
-            <div class="form-group"> Sex<br/> <InputTextArea @bind-Value="adultToEdit.Sex"></InputTextArea></div>
+        <div class="form-group"> Job title<br/> <InputTextArea class="input" @bind-Value="adultToEdit.JobTitle.JobTitle"></InputTextArea></div>
+            <div class="form-group"> Salary<br/> <InputNumber class="input"@bind-Value="adultToEdit.JobTitle.Salary"></InputNumber></div>
+            <div class="form-group"> First name<br/> <InputTextArea class="input" @bind-Value="adultToEdit.FirstName"></InputTextArea></div>
+            <div class="form-group"> Last name<br/> <InputTextArea class="input" @bind-Value="adultToEdit.LastName"></InputTextArea></div>
+            <div class="form-group"> Hair color<br/> <InputTextArea class="input" @bind-Value="adultToEdit.HairColor"></InputTextArea></div>
+            <div class="form-group"> Eye color<br/> <InputTextArea class="input" @bind-Value="adultToEdit.EyeColor"></InputTextArea></div>
+            <div class="form-group"> Age<br/> <InputNumber class="input"@bind-Value="adultToEdit.Age"></InputNumber></div>
+            <div class="form-group"> Weight<br/> <InputNumber class="input"@bind-Value="adultToEdit.Weight"></InputNumber></div>
+            <div class="form-group"> Height<br/> <InputNumber class="input"@bind-Value="adultToEdit.Height"></InputNumber></div>
+            <div class="form-group"> Sex<br/> <InputTextArea class="input"@bind-Value="adultToEdit.Sex"></InputTextArea></div>
         <p class="actions">
             <button class="btn btn-outline-dark" type="submit">Save</button>
         </p>
@@ -32,20 +34,16 @@ else
 @code {
     [Parameter]
     public int Id { get; set; }
-   // private Job job;
-    
+
     private Adult adultToEdit;
 
     protected override async Task OnInitializedAsync()
     {
-        //job = new Job();
         adultToEdit = _adults.Get(Id);
     }
 
     private void Save()
     {
-       /* adultToEdit.JobTitle.JobTitle = job.JobTitle;
-        adultToEdit.JobTitle.Salary = job.Salary;*/
         _adults.Update(adultToEdit);
         nvg.NavigateTo("/Adults");
     }

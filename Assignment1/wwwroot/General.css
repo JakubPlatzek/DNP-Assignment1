@@ -1,0 +1,17 @@
+﻿#username{
+    margin-bottom: 1.5rem;
+}
+
+#btn{
+    margin-top: 1.5rem;
+}
+
+textarea:hover{
+    background-color: #c8d2d3;
+    font-palette: light; 
+}
+
+input:hover{
+    background-color: #c8d2d3;
+    font-palette: light;
+}

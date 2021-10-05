@@ -5,13 +5,15 @@
 @inject IUserService _userService;
 <h3>Registration page</h3>
 
+<link href="Register.css" rel="stylesheet">
+
 <EditForm Model="@newUser" OnValidSubmit="@AddNewUser"><DataAnnotationsValidator/><ValidationSummary/>
     <label>Username:</label><br/>
     <input type="text" placeholder="user name"@bind-value="newUser.UserName"/>
-    <br/><label>Password:</label><br/>
+    <br/><label id="word">Password:</label><br/>
      <input type="text" placeholder="password" @bind-value="newUser.Password"/>
     <p class="actions">
-                <button class="btn btn-outline-dark" type="submit">Create</button>
+                <button id="btn" class="btn btn-outline-dark" type="submit">Create</button>
             </p>
 </EditForm>
 

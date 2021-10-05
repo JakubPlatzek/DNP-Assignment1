@@ -1,0 +1,16 @@
+﻿label{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin-bottom: 0rem !important;
+}
+#btn1, #btn2 {
+    margin-left: 1.5rem;
+}
+
+#pass{
+    margin-left: 1.5rem;
+}
+
+input:hover{
+    background-color: #c8d2d3;
+    font-palette: light;
+}

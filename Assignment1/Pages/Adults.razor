@@ -5,10 +5,11 @@
 @inject NavigationManager _navgManager;
 @inject IAdultsData _adults
 
+<link href="Adults.css" rel="stylesheet">
 
 <h3>Adults</h3>
 <p>
-    Filter by: <select class="form-control-plaintext" @oninput="@((args) => FilterBySelected(args))" style="width: 150px ">
+    Filter by: <select id="selecter" class="form-control-plaintext" @oninput="@((args) => FilterBySelected(args))" style="width: 150px">
         <option>Id</option><option>First name</option><option>Last name</option><option>Job title</option><option>Salary</option><option>Age</option>
         <option>Hair color</option><option>Eye color</option><option>Weight</option><option>Height</option><option>Sex</option>
     </select>
@@ -27,14 +28,13 @@ else if(!adultsToShow.Any()){
 }
 else
 {
-    <table class="adults">
+    <table class="table">
         <thead>
         <tr>
             <th>Id</th><th>First name</th><th>Last name</th>><th>Job title</th><th>Salary</th><th>Age</th>
-            <th>Hair color</th><th>Eye color</th><th>Weight</th><th>Height</th><th>Sex</th>
+            <th>Hair color</th><th>Eye color</th><th>Weight</th><th>Height</th><th>Sex</th><th></th><th></th>
         </tr>
-        </thead>
-        <tbody>
+        </thead><tbody>
         @foreach (var item in adultsToShow)
         {
             <tr>
@@ -50,12 +50,12 @@ else
                 <td>@item.Height</td>
                 <td>@item.Sex</td>
                 <td>
-                    <button @onclick="@(() => RemoveAdult(item.Id))">
+                    <button class="moi btn-outline-dark" @onclick="@(() => RemoveAdult(item.Id))">
                         <i class="oi oi-trash" style="color:red"/>
                     </button>
                 </td>
                 <td>
-                    <button @onclick="@(() => Edit(item.Id))">
+                    <button class="moi btn-outline-dark" @onclick="@(() => Edit(item.Id))">
                         <i class="oi oi-pencil" style="color:#1b6ec2"/>
                     </button>
                 </td>
