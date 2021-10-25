@@ -39,7 +39,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        adultToEdit = _adults.Get(Id);
+        adultToEdit = await _adults.Get(Id);
     }
 
     private void Save()

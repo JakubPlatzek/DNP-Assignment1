@@ -74,7 +74,7 @@ private IList<Adult> adultsToShow;
 
     protected override async Task OnInitializedAsync()
     {
-        allAdults = _adults.GetAdults();
+        allAdults = await _adults.GetAdults();
         adultsToShow = allAdults;
         inputField = "";
     }
@@ -254,7 +254,7 @@ private IList<Adult> adultsToShow;
     private void RemoveAdult(int Id)
     {
         Adult adultToRemove = allAdults.First(t => t.Id == Id);
-        _adults.RemoveAdult(adultToRemove.FirstName, adultToRemove.LastName);
+        _adults.RemoveAdult(adultToRemove.Id);
         allAdults.Remove(adultToRemove);
     }
 }
