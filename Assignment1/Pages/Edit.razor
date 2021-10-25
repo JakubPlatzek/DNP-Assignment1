@@ -1,4 +1,4 @@
-@page "/Edit/{Id:int}"
+@page "/Adults/{Id:int}"
 @using Models
 @using Assignment1.Data
 @inject IAdultsData _adults;
@@ -42,9 +42,9 @@ else
         adultToEdit = await _adults.Get(Id);
     }
 
-    private void Save()
+    private async Task Save()
     {
-        _adults.Update(adultToEdit);
+        await _adults.Update(adultToEdit);
         nvg.NavigateTo("/Adults");
     }
 }

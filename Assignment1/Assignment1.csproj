@@ -10,4 +10,10 @@
       <None Include="wwwroot\General.css" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Database\adults.json" />
+      <_ContentIncludedByDefault Remove="Database\families.json" />
+      <_ContentIncludedByDefault Remove="Database\users.json" />
+    </ItemGroup>
+
 </Project>

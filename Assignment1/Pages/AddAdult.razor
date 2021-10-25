@@ -29,10 +29,10 @@
     private Adult newAdultItem = new Adult();
     private Job job = new Job();
     
-    private void AddNewAdult()
+    private async Task AddNewAdult()
     {
         newAdultItem.JobTitle = job;
-        _adults.AddAdult(newAdultItem);
+        await _adults.AddAdult(newAdultItem);
         nvg.NavigateTo("/Adults");
     }
 }

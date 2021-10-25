@@ -20,10 +20,10 @@
 @code {
     private User newUser= new User();
 
-    private void AddNewUser()
+    private async Task AddNewUser()
     {
-        _userService.AddUser(newUser);
-        nvg.NavigateTo("/");
+       await _userService.AddUser(newUser);
+       nvg.NavigateTo("/");
     }
     
 }

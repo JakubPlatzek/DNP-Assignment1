@@ -1,5 +1,4 @@
 using Assignment1.Data;
-using Assignment1.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -26,10 +25,8 @@ namespace Assignment1
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<IAdultsData, AdultRemoteData>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserService, UserRemoteData>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
-            services.AddSingleton<FileContext>();
-            //can figure out some policies later
             services.AddAuthorization(options =>
             {
                options.AddPolicy("MustBeLoggedIn", a => a.RequireAuthenticatedUser().RequireClaim("Logged", "true"));
