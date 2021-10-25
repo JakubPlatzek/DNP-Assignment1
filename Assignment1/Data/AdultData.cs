@@ -8,7 +8,7 @@ using Models;
 
 namespace Assignment1.Data
 {
-    public class AdultData : IAdultsData
+    public class AdultData 
     {
         private IList<Adult> adults;
         private FileContext fileContext;

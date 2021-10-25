@@ -1,14 +1,15 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Models;
 
 namespace Assignment1.Data
 {
     public interface IAdultsData
     {
-        IList<Adult> GetAdults();
-        void AddAdult(Adult adult);
-        void RemoveAdult(string firstName, string lastName);
-        void Update(Adult adult);
-        Adult Get(int id);
+        Task<IList<Adult>> GetAdults();
+        Task AddAdult(Adult adult);
+        Task RemoveAdult(int id);
+        Task Update(Adult adult);
+        Task<Adult> Get(int id);
     }
 }

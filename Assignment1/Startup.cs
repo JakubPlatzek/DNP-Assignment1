@@ -25,7 +25,7 @@ namespace Assignment1
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<IAdultsData, AdultData>();
+            services.AddSingleton<IAdultsData, AdultRemoteData>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             services.AddSingleton<FileContext>();
